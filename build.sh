@@ -13,14 +13,14 @@ trap 'echo FAILED COMMAND: $previous_command' EXIT
 #-------------------------------------------------------------------------------------------
 
 INSTALL_PATH=/opt/cross
-TARGET=arm-armv6l-linux-gnueabi
+TARGET=arm-armv4t-linux-gnueabi
 USE_NEWLIB=0
 LINUX_ARCH=arm
-CONFIGURATION_OPTIONS=" --enable-threads --disable-libmudflap --disable-libssp --disable-libstdcxx-pch --enable-extra-sgxxlite-multilibs --with-arch=armv6 --with-gnu-as --with-gnu-ld --enable-shared --enable-lto --enable-symvers=gnu --enable-__cxa_atexit --disable-nls --enable-poison-system-directories" # --disable-threads --disable-shared
+CONFIGURATION_OPTIONS="--enable-languages=c,c++ --with-arch=armv4t --with-fpu=neon --with-float=hard --enable-__cxa_atexit --disable-libmudflap --disable-libgomp --enable-libssp --disable-libquadmath --disable-libquadmath-support --enable-threads=posix --enable-linker-build-id --with-linker-hash-style=gnu --disable-nls --disable-multilib --enable-c99 --enable-long-long"
 PARALLEL_MAKE=-j8
 BINUTILS_VERSION=binutils-2.30
 GCC_VERSION=gcc-8.1.0
-LINUX_KERNEL_VERSION=linux-3.0.56
+LINUX_KERNEL_VERSION=linux-3.3.8
 GLIBC_VERSION=glibc-2.20
 #GLIBC_PORTS_VERSION=glibc-ports-2.20
 #MPFR_VERSION=mpfr-4.0.1
