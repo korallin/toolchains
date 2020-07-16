@@ -23,9 +23,10 @@ RUN CXXFLAGS=-intl ./configure --prefix=$PWD/../crosstool-ng-build
 RUN make
 RUN make install
 RUN apk add --no-cache binutils
+RUN apk add --no-cache wget
 COPY ./crosstool-ng-workspace /home/crosstool-ng-workspace
 WORKDIR /home/crosstool-ng-workspace
 RUN ../crosstool-ng-build/bin/ct-ng build
-ENV PATH="/opt/cross/bin:${PATH}"
+ENV PATH="/opt/cross/arm-armv6l-linux-gnueabi/bin:${PATH}"
 ENTRYPOINT bash
 CMD "--help"
