@@ -21,18 +21,17 @@ RUN apt-get install -y xz-utils
 RUN apt-get install -y zip
 RUN apt-get install -y patch
 RUN apt-get install -y libtool-bin
+RUN apt-get install -y wget
 COPY ./crosstool-ng /home/crosstool-ng
 WORKDIR /home/crosstool-ng
 RUN ./bootstrap
 RUN CXXFLAGS=-intl ./configure --prefix=$PWD/../crosstool-ng-build
 RUN make
 RUN make install
-RUN apt-get install -y wget
 COPY ./crosstool-ng-workspace /home/crosstool-ng-workspace
 WORKDIR /home/crosstool-ng-workspace
 RUN ../crosstool-ng-build/bin/ct-ng build
 RUN mv /home/crosstool-ng-workspace/opt /
-RUN ls -lisah /opt/cross
 ENV PATH="/opt/cross/bin:${PATH}"
 WORKDIR /home/
 ENTRYPOINT bash

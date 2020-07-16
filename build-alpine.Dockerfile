@@ -16,18 +16,20 @@ RUN apk add --no-cache gawk
 RUN apk add --no-cache libtool
 RUN apk add --no-cache ncurses-dev
 RUN apk add --no-cache gettext-dev
+RUN apk add --no-cache binutils
+RUN apk add --no-cache wget
+RUN apk add --no-cache patch
 COPY ./crosstool-ng /home/crosstool-ng
 WORKDIR /home/crosstool-ng
 RUN ./bootstrap
 RUN CXXFLAGS=-intl ./configure --prefix=$PWD/../crosstool-ng-build
 RUN make
 RUN make install
-RUN apk add --no-cache binutils
-RUN apk add --no-cache wget
-RUN apk add --no-cache patch
 COPY ./crosstool-ng-workspace /home/crosstool-ng-workspace
 WORKDIR /home/crosstool-ng-workspace
 RUN ../crosstool-ng-build/bin/ct-ng build
-ENV PATH="/opt/cross/arm-armv6l-linux-gnueabi/bin:${PATH}"
+RUN mv /home/crosstool-ng-workspace/opt /
+ENV PATH="/opt/cross/bin:${PATH}"
+WORKDIR /home/
 ENTRYPOINT bash
 CMD "--help"
