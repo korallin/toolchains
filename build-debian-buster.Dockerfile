@@ -31,6 +31,9 @@ RUN apt-get install -y wget
 COPY ./crosstool-ng-workspace /home/crosstool-ng-workspace
 WORKDIR /home/crosstool-ng-workspace
 RUN ../crosstool-ng-build/bin/ct-ng build
-ENV PATH="/opt/cross/arm-armv6l-linux-gnueabi/bin:${PATH}"
+RUN mv /home/crosstool-ng-workspace/opt /
+RUN ls -lisah /opt/cross
+ENV PATH="/opt/cross/bin:${PATH}"
+WORKDIR /home/
 ENTRYPOINT bash
 CMD "--help"

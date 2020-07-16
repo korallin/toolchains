@@ -24,6 +24,7 @@ RUN make
 RUN make install
 RUN apk add --no-cache binutils
 RUN apk add --no-cache wget
+RUN apk add --no-cache patch
 COPY ./crosstool-ng-workspace /home/crosstool-ng-workspace
 WORKDIR /home/crosstool-ng-workspace
 RUN ../crosstool-ng-build/bin/ct-ng build
