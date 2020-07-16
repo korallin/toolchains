@@ -1,7 +1,6 @@
-dockername=zoop_toolchain_build-debian-buster
+dockername=zoop_toolchain_build-alpine
 docker rm $dockername
-echo "docker build -f ./build-debian-buster.Dockerfile -t $dockername:latest --build-arg USER_ID=$(id -u ${USER}) --build-arg GROUP_ID=$(id -g ${USER}) ."
-docker build -f ./build-debian-buster.Dockerfile -t $dockername:latest --build-arg USER_ID=$(id -u ${USER}) --build-arg GROUP_ID=$(id -g ${USER}) .
+docker build -f ./build-alpine.Dockerfile -t $dockername:latest .
 docker create --name $dockername $dockername:latest
 docker_out_tar_name=docker-${dockername}-out.tar
 docker cp $dockername:/opt - > $docker_out_tar_name

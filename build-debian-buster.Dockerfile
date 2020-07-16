@@ -1,38 +1,75 @@
 FROM debian:buster-slim
-RUN apt-get update -y
-RUN apt-get install -y bash
-RUN apt-get install -y gcc
-RUN apt-get install -y g++
-RUN apt-get install -y make
-RUN apt-get install -y grep
-RUN apt-get install -y flex
-RUN apt-get install -y bison
-RUN apt-get install -y autoconf 
-RUN apt-get install -y automake
-RUN apt-get install -y texinfo
-RUN apt-get install -y help2man
-RUN apt-get install -y file
-RUN apt-get install -y gawk
-RUN apt-get install -y libtool
-RUN apt-get install -y ncurses-dev
-RUN apt-get install -y gettext
-RUN apt-get install -y bzip2
-RUN apt-get install -y xz-utils
-RUN apt-get install -y zip
-RUN apt-get install -y patch
-RUN apt-get install -y libtool-bin
-RUN apt-get install -y wget
-COPY ./crosstool-ng /home/crosstool-ng
-WORKDIR /home/crosstool-ng
+
+ARG USER_ID
+ARG GROUP_ID
+
+RUN apt-get update -y && \
+    apt-get install -y \
+    bash \
+    gcc \
+    g++ \
+    make \
+    grep \
+    flex \
+    bison \
+    autoconf  \
+    automake \
+    texinfo \
+    help2man \
+    file \
+    gawk \
+    libtool \
+    ncurses-dev \
+    gettext \
+    bzip2 \
+    xz-utils \
+    zip \
+    patch \
+    libtool-bin \
+    wget
+
+RUN mkdir -p /opt/cross/
+RUN mkdir -p /home/docker_usr/
+
+#RUN if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then ;fi; echo ${USER_ID:-0} ${GROUP_ID:-0}
+
+ENTRYPOINT bash
+
+RUN if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then\
+    groupadd -g ${GROUP_ID} docker_usr &&\
+    useradd -l -u ${USER_ID} -g docker_usr docker_usr &&\
+    install -d -m 0755 -o docker_usr -g docker_usr /home/docker_usr &&\
+    chown --changes --silent --no-dereference --recursive \
+          ${USER_ID}:${GROUP_ID} \
+        /home/docker_usr \
+        /opt/cross \
+    ;fi
+
+USER root
+COPY ./crosstool-ng /home/docker_usr/crosstool-ng
+RUN chown --changes --silent --no-dereference --recursive \
+        ${USER_ID}:${GROUP_ID} \
+        /home/docker_usr/crosstool-ng 
+WORKDIR /home/docker_usr/crosstool-ng
+USER docker_usr
+
 RUN ./bootstrap
-RUN CXXFLAGS=-intl ./configure --prefix=$PWD/../crosstool-ng-build
+RUN ./configure --prefix=$PWD/../crosstool-ng-build
 RUN make
 RUN make install
-COPY ./crosstool-ng-workspace /home/crosstool-ng-workspace
-WORKDIR /home/crosstool-ng-workspace
+
+USER root
+COPY ./crosstool-ng-workspace /home/docker_usr/crosstool-ng-workspace
+RUN chown --changes --silent --no-dereference --recursive \
+        ${USER_ID}:${GROUP_ID} \
+        /home/docker_usr/crosstool-ng-workspace 
+WORKDIR /home/docker_usr/crosstool-ng-workspace
+USER docker_usr
+
 RUN ../crosstool-ng-build/bin/ct-ng build
-RUN mv /home/crosstool-ng-workspace/opt /
 ENV PATH="/opt/cross/bin:${PATH}"
+
 WORKDIR /home/
+
 ENTRYPOINT bash
 CMD "--help"
