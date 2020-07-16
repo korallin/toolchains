@@ -6,6 +6,7 @@ make
 make install
 cd ../crosstool-ng-workspace
 ../crosstool-ng-build/bin/ct-ng build
-
-ENV PATH="/opt/cross/arm-armv6l-linux-gnueabi/bin:${PATH}"
- 
+tar -cavf cross-armv6l-gcc.tar.gz opt/cross
+chmod -R 777 ./opt/cross
+rm -rf ./opt
+mv cross-armv6l-gcc.tar.gz ..
