@@ -1,4 +1,8 @@
 FROM alpine:3.7
+
+ARG USER_ID
+ARG GROUP_ID
+
 RUN apk update && \
     apk add build-base \
     bash \
@@ -26,17 +30,46 @@ RUN apk update && \
     patch \
     coreutils \
     unzip
-COPY ./crosstool-ng /home/crosstool-ng
-WORKDIR /home/crosstool-ng
+
+RUN mkdir -p /opt/cross/
+RUN mkdir -p /home/docker_usr/
+
+ENTRYPOINT bash
+
+RUN if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then\
+    groupadd -g ${GROUP_ID} docker_usr &&\
+    useradd -l -u ${USER_ID} -g docker_usr docker_usr &&\
+    install -d -m 0755 -o docker_usr -g docker_usr /home/docker_usr &&\
+    chown --changes --silent --no-dereference --recursive \
+          ${USER_ID}:${GROUP_ID} \
+        /home/docker_usr \
+        /opt/cross \
+    ;fi
+
+USER root
+COPY ./crosstool-ng /home/docker_usr/crosstool-ng
+RUN chown --changes --silent --no-dereference --recursive \
+        ${USER_ID}:${GROUP_ID} \
+        /home/docker_usr/crosstool-ng 
+WORKDIR /home/docker_usr/crosstool-ng
+USER docker_usr
+
 RUN ./bootstrap
 RUN ./configure --prefix=$PWD/../crosstool-ng-build
 RUN make
 RUN make install
-COPY ./crosstool-ng-workspace /home/crosstool-ng-workspace
-WORKDIR /home/crosstool-ng-workspace
+
+USER root
+COPY ./crosstool-ng-workspace /home/docker_usr/crosstool-ng-workspace
+RUN chown --changes --silent --no-dereference --recursive \
+        ${USER_ID}:${GROUP_ID} \
+        /home/docker_usr/crosstool-ng-workspace 
+WORKDIR /home/docker_usr/crosstool-ng-workspace
+USER docker_usr
+
 RUN ../crosstool-ng-build/bin/ct-ng build
-RUN mv /home/crosstool-ng-workspace/opt /
 ENV PATH="/opt/cross/bin:${PATH}"
-WORKDIR /home/
+
+WORKDIR /home/docker_usr
 ENTRYPOINT bash
-#CMD "--help"
+CMD "--help"

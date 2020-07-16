@@ -31,8 +31,6 @@ RUN apt-get update -y && \
 RUN mkdir -p /opt/cross/
 RUN mkdir -p /home/docker_usr/
 
-#RUN if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then ;fi; echo ${USER_ID:-0} ${GROUP_ID:-0}
-
 ENTRYPOINT bash
 
 RUN if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then\
@@ -69,7 +67,6 @@ USER docker_usr
 RUN ../crosstool-ng-build/bin/ct-ng build
 ENV PATH="/opt/cross/bin:${PATH}"
 
-WORKDIR /home/
-
+WORKDIR /home/docker_usr
 ENTRYPOINT bash
 CMD "--help"
