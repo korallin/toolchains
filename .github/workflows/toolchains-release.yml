@@ -20,3 +20,10 @@ jobs:
     #    ref: ${{ steps.get_tag_name.outputs.VERSION }}
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Build
+      run: build-docker-all.sh
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        # A file, directory or wildcard pattern that describes what to upload
+        path:./*.tar.gz 
