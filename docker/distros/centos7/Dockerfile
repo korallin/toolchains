@@ -4,7 +4,7 @@ ARG GROUP_ID
 RUN groupadd -g $GROUP_ID docker_usr
 RUN useradd -d /home/docker_usr -m -g $GROUP_ID -u $USER_ID -s /bin/bash docker_usr
 RUN yum install -y epel-release
-RUN yum install -y autoconf gperf bison file flex texinfo help2man gcc-c++ libtool make patch \
+RUN yum install -y glibc-static libstdc++-static autoconf gperf bison file flex texinfo help2man gcc-c++ libtool make patch \
     ncurses-devel python36-devel perl-Thread-Queue bzip2 git wget which xz unzip
 RUN ln -sf python36 /usr/bin/python3
 RUN wget -O /sbin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64

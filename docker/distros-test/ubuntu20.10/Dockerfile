@@ -1,4 +1,4 @@
-FROM ubuntu:18.10
+FROM ubuntu:20.10
 ARG USER_ID
 ARG GROUP_ID
 RUN groupadd -g $GROUP_ID docker_usr

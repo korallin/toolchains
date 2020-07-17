@@ -1,7 +1,9 @@
+#!/bin/bash
+
+docker_image_prefix="zoop-"
+
 BASEDIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 TOPDIR=$(dirname "$BASEDIR")
-
-#dockername=alpine3.8
 
 mkdir -p ${TOPDIR}/.tarball_cache
 
@@ -14,14 +16,23 @@ docker run --rm -i -t \
     -v ${BASEDIR}/distros/${dockername}/opt/cross:/opt/cross \
     -v ${BASEDIR}/docked-scripts:/home/docker_usr/docked-scripts:ro \
     -v ${TOPDIR}/.tarball_cache:/home/docker_usr/src \
-    zoop-${dockername} \
+    ${docker_image_prefix}${dockername} \
     su -l docker_usr -c "/bin/bash --login -c '$*'"
+return $?
 }
 run_docker_build(){
 
-    if [ "$(docker images -q zoop-${dockername}:latest 2> /dev/null)" == "" ]; then
+    if [ "$(docker images -q ${docker_image_prefix}${dockername}:latest 2> /dev/null)" == "" ]
+    then
         echo "---- $dockernamei needs docker image to be built"
-        docker build --no-cache -t zoop-${dockername} --build-arg USER_ID=`id -g` --build-arg GROUP_ID=`id -u` ${BASEDIR}/distros/${dockername}
+        docker build --no-cache -t ${docker_image_prefix}${dockername} --build-arg USER_ID=`id -g` --build-arg GROUP_ID=`id -u` ${BASEDIR}/distros/${dockername}
+
+        if [ $? -eq 0 ]; then
+            echo ---- Build successfull
+        else
+            echo ---- Build failed
+            return 1
+        fi
     fi
     
     mkdir -p ${BASEDIR}/distros/${dockername}/workspace
@@ -31,18 +42,32 @@ run_docker_build(){
     mkdir -p ${BASEDIR}/distros/${dockername}/workspace/.build/tarballs
     run_docked '~/docked-scripts/link-workspace.sh'
     
-    if [ ! -f "${BASEDIR}/distros/${dockername}/install/bin/ct-ng" ]; then
+    if [ ! -f "${BASEDIR}/distros/${dockername}/install/bin/ct-ng" ]
+    then
         echo "---- $dockername needs ct-ng to be built"
         run_docked '~/docked-scripts/build-ct-ng.sh'
+        if [ $? -eq 0 ]; then
+            echo ---- Build successfull
+        else
+            echo ---- Build failed
+            return 1
+        fi
     else
         echo "---- $dockername : Nothing to be done to ct-ng bin"
     fi
     
     config="${TOPDIR}/crosstool-ng-workspace/.config"
     toolchain="${BASEDIR}/distros/${dockername}/opt/cross/bin/*-gcc"
-    if [ ! $config -ot $toolchain ]; then
+    if [ ! $config -ot $toolchain ]
+    then
         echo "---- $dockername needs toolchain to be built"
         run_docked '~/docked-scripts/build-toolchain.sh'
+        if [ $? -eq 0 ]; then
+            echo ---- Build successfull
+        else
+            echo ---- Build failed
+            return 1
+        fi
     else
         echo "---- $dockername : Nothing to be done to toolchain"
     fi
@@ -50,18 +75,20 @@ run_docker_build(){
     
     toolchain="${BASEDIR}/distros/${dockername}/opt/cross/bin/*-gcc"
     toolchain_tar="${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz"
-    if [ ! $toolchain -ot $toolchain_tar ]; then
+    if [ -f $toolchain ] && [ ! $toolchain -ot $toolchain_tar ]
+    then
         echo "---- $dockername needs toolchain tar to be assembled"
         echo "tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross"
         tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross
     else
-        echo "---- $dockername : Nothing to be done to toolchain"
+        echo "---- $dockername : Nothing to be done to toolchain tar"
     fi
     
-    #docker image save -o ${BASEDIR}/distros/${dockername}/${dockername}.tar zoop-${dockername}:latest
+    #docker image save -o ${BASEDIR}/distros/${dockername}/${dockername}.tar ${docker_image_prefix}${dockername}:latest
 }
 
-for container in $*; do
+for container in $*
+do
     dockername=$(basename $container)
     if [ -d "$BASEDIR/distros/$dockername" ] 
     then
