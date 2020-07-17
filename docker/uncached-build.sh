@@ -8,7 +8,7 @@ TOPDIR=$(dirname "$BASEDIR")
 mkdir -p ${TOPDIR}/.tarball_cache
 
 run_docked() {
-docker run --rm -i -t \
+docker run --rm \
     -v ${TOPDIR}/crosstool-ng:/crosstool-ng:ro \
     -v ${TOPDIR}/ctng-workspace-arm-armv6l-linux-gnueabi:/home/docker_usr/ctng-config-arm-armv6l-linux-gnueabi:ro \
     -v ${BASEDIR}/distros/${dockername}/workspace:/home/docker_usr/ctng-workspace-arm-armv6l-linux-gnueabi \
