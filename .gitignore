@@ -1,5 +1,5 @@
-**/*.tar.gz
-**/*.tar.xz
+**/*.tar.*
+**/*.tar
 docker/distros/**/install
 docker/distros/**/opt
 docker/distros/**/workspace
