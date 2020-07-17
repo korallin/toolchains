@@ -15,7 +15,7 @@ docker run --rm -i -t \
     -v ${BASEDIR}/distros/${dockername}/install:/opt/ctng \
     -v ${BASEDIR}/distros/${dockername}/opt/cross:/opt/cross \
     -v ${BASEDIR}/docked-scripts:/home/docker_usr/docked-scripts:ro \
-    -v ${TOPDIR}/.tarball_cache:/home/docker_usr/src \
+    -v ${TOPDIR}/.tarball_cache:/home/docker_usr/.tarball_cache \
     ${docker_image_prefix}${dockername} \
     su -l docker_usr -c "/bin/bash --login -c '$*'"
 return $?
