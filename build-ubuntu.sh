@@ -1,4 +1,5 @@
-#sudo apt install autoconf
+#!/bin/bash
+
 sudo mkdir -p /opt/cross
 sudo chown $USER /opt/cross
 cd ./crosstool-ng
