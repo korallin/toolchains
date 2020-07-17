@@ -2,5 +2,5 @@
 # Use --login to ensure /etc/profile is read
 
 echo "----Build Toolchain"
-cd /home/docker_usr/crosstool-ng-workspace 
+cd /home/docker_usr/ctng-workspace-arm-armv6l-linux-gnueabi 
 ct-ng build

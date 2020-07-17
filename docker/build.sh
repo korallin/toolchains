@@ -10,8 +10,8 @@ mkdir -p ${TOPDIR}/.tarball_cache
 run_docked() {
 docker run --rm -i -t \
     -v ${TOPDIR}/crosstool-ng:/crosstool-ng:ro \
-    -v ${TOPDIR}/crosstool-ng-workspace:/home/docker_usr/crosstool-ng-config:ro \
-    -v ${BASEDIR}/distros/${dockername}/workspace:/home/docker_usr/crosstool-ng-workspace \
+    -v ${TOPDIR}/ctng-workspace-arm-armv6l-linux-gnueabi:/home/docker_usr/ctng-config-arm-armv6l-linux-gnueabi:ro \
+    -v ${BASEDIR}/distros/${dockername}/workspace:/home/docker_usr/ctng-workspace-arm-armv6l-linux-gnueabi \
     -v ${BASEDIR}/distros/${dockername}/install:/opt/ctng \
     -v ${BASEDIR}/distros/${dockername}/opt/cross:/opt/cross \
     -v ${BASEDIR}/docked-scripts:/home/docker_usr/docked-scripts:ro \
@@ -56,7 +56,7 @@ run_docker_build(){
         echo "---- $dockername : Nothing to be done to ct-ng bin"
     fi
     
-    config="${TOPDIR}/crosstool-ng-workspace/.config"
+    config="${TOPDIR}/ctng-workspace-arm-armv6l-linux-gnueabi/.config"
     toolchain="${BASEDIR}/distros/${dockername}/opt/cross/bin/*-gcc"
     if [ ! $config -ot $toolchain ]
     then

@@ -6,5 +6,5 @@ cd ./crosstool-ng
 ./configure --prefix=$PWD/../crosstool-ng-build
 make
 make install
-cd ../crosstool-ng-workspace
+cd ../ctng-workspace-arm-armv6l-linux-gnueabi
 ../crosstool-ng-build/bin/ct-ng build
