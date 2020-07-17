@@ -1,0 +1,30 @@
+name: ToolchainsRelease
+
+on:
+  push:
+    branches: [ master ]
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get tag name
+      id: get_tag_name
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build All
+      run: ./build-docker-all-uncached.sh
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        path: "*.tar.gz"
