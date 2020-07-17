@@ -22,12 +22,17 @@ return $?
 }
 run_docker_build(){
 
-    docker build --no-cache -t ${docker_image_prefix}${dockername} --build-arg USER_ID=1001 --build-arg GROUP_ID=1001 ${BASEDIR}/distros/${dockername}
-    if [ $? -eq 0 ]; then
-        echo ---- Build successfull
-    else
-        echo ---- Build failed
-        return 1
+    if [ "$(docker images -q ${docker_image_prefix}${dockername}:latest 2> /dev/null)" == "" ]
+    then
+        echo "---- $dockernamei needs docker image to be built"
+        docker build --no-cache -t ${docker_image_prefix}${dockername} --build-arg USER_ID=1001 --build-arg GROUP_ID=1001 ${BASEDIR}/distros/${dockername}
+
+        if [ $? -eq 0 ]; then
+            echo ---- Build successfull
+        else
+            echo ---- Build failed
+            return 1
+        fi
     fi
     
     mkdir -p ${BASEDIR}/distros/${dockername}/workspace
@@ -35,34 +40,50 @@ run_docker_build(){
     mkdir -p ${BASEDIR}/distros/${dockername}/opt/cross
     
     mkdir -p ${BASEDIR}/distros/${dockername}/workspace/.build/tarballs
-
     run_docked '~/docked-scripts/link-workspace.sh'
-    if [ $? -eq 0 ]; then
-        echo ---- Build successfull
+    
+    if [ ! -f "${BASEDIR}/distros/${dockername}/install/bin/ct-ng" ]
+    then
+        echo "---- $dockername needs ct-ng to be built"
+        run_docked '~/docked-scripts/build-ct-ng.sh'
+        if [ $? -eq 0 ]; then
+            echo ---- Build successfull
+        else
+            echo ---- Build failed
+            return 1
+        fi
     else
-        echo ---- Build failed
-        return 1
+        echo "---- $dockername : Nothing to be done to ct-ng bin"
     fi
-
-    run_docked '~/docked-scripts/build-ct-ng.sh'
-    if [ $? -eq 0 ]; then
-        echo ---- Build successfull
+    
+    config="${TOPDIR}/ctng-workspace-arm-armv6l-linux-gnueabi/.config"
+    toolchain="${BASEDIR}/distros/${dockername}/opt/cross/bin/*-gcc"
+    if [ ! $config -ot $toolchain ]
+    then
+        echo "---- $dockername needs toolchain to be built"
+        run_docked '~/docked-scripts/build-toolchain.sh'
+        if [ $? -eq 0 ]; then
+            echo ---- Build successfull
+        else
+            echo ---- Build failed
+            return 1
+        fi
     else
-        echo ---- Build failed
-        return 1
+        echo "---- $dockername : Nothing to be done to toolchain"
     fi
-
-    run_docked '~/docked-scripts/build-toolchain.sh'
-    if [ $? -eq 0 ]; then
-        echo ---- Build successfull
+    
+    
+    toolchain="${BASEDIR}/distros/${dockername}/opt/cross/bin/*-gcc"
+    toolchain_tar="${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz"
+    if [ -f $toolchain ] && [ ! $toolchain -ot $toolchain_tar ]
+    then
+        echo "---- $dockername needs toolchain tar to be assembled"
+        echo "tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross"
+        tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross
     else
-        echo ---- Build failed
-        return 1
+        echo "---- $dockername : Nothing to be done to toolchain tar"
     fi
-
-    echo "tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross"
-    tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross
-
+    
     #docker image save -o ${BASEDIR}/distros/${dockername}/${dockername}.tar ${docker_image_prefix}${dockername}:latest
 }
 
@@ -78,3 +99,5 @@ do
         echo "$container is not a managed docker dir"
     fi
 done
+
+
