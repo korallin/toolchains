@@ -23,15 +23,42 @@ return $?
 run_docker_build(){
 
     docker build --no-cache -t ${docker_image_prefix}${dockername} --build-arg USER_ID=1001 --build-arg GROUP_ID=1001 ${BASEDIR}/distros/${dockername}
+    if [ $? -eq 0 ]; then
+        echo ---- Build successfull
+    else
+        echo ---- Build failed
+        return 1
+    fi
     
     mkdir -p ${BASEDIR}/distros/${dockername}/workspace
     mkdir -p ${BASEDIR}/distros/${dockername}/install
     mkdir -p ${BASEDIR}/distros/${dockername}/opt/cross
     
     mkdir -p ${BASEDIR}/distros/${dockername}/workspace/.build/tarballs
+
     run_docked '~/docked-scripts/link-workspace.sh'
+    if [ $? -eq 0 ]; then
+        echo ---- Build successfull
+    else
+        echo ---- Build failed
+        return 1
+    fi
+
     run_docked '~/docked-scripts/build-ct-ng.sh'
+    if [ $? -eq 0 ]; then
+        echo ---- Build successfull
+    else
+        echo ---- Build failed
+        return 1
+    fi
+
     run_docked '~/docked-scripts/build-toolchain.sh'
+    if [ $? -eq 0 ]; then
+        echo ---- Build successfull
+    else
+        echo ---- Build failed
+        return 1
+    fi
 
     echo "tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross"
     tar -caf ${BASEDIR}/distros/${dockername}/cross-armv6l-gcc-${dockername}.tar.gz -C ${BASEDIR}/distros/${dockername} opt/cross
