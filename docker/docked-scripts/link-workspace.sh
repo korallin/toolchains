@@ -2,9 +2,9 @@
 # Use --login to ensure /etc/profile is read
 
 cd /home/docker_usr/crosstool-ng-workspace/
-ln -s /home/docker_usr/crosstool-ng-config/.config
+ln -s /home/docker_usr/crosstool-ng-config/.config >/dev/null 2>&1
 
 cd /home/docker_usr/crosstool-ng-workspace/.build/tarballs
 for file in /home/docker_usr/src/* ; do
-    ln -s $file 2>&1
+    ln -s $file >/dev/null 2>&1
 done
