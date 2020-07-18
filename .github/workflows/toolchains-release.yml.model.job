@@ -14,10 +14,10 @@
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

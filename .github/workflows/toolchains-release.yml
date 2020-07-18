@@ -23,12 +23,12 @@ jobs:
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   centos7:
     env:
@@ -46,12 +46,12 @@ jobs:
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   fedora29:
     env:
@@ -69,12 +69,12 @@ jobs:
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   gentoo-amd64:
     env:
@@ -92,12 +92,12 @@ jobs:
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   mint19-amd64:
     env:
@@ -115,12 +115,12 @@ jobs:
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ubuntu16_04:
     env:
@@ -138,12 +138,12 @@ jobs:
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ubuntu18_04:
     env:
@@ -161,10 +161,10 @@ jobs:
       run: ./build-docker-${DIST_ID}.sh
 
     - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: docker/distros/*/*.tar.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
