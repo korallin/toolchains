@@ -1,0 +1,9 @@
+name: ToolchainsRelease
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+

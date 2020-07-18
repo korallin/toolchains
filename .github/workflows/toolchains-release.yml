@@ -6,6 +6,7 @@ on:
     - 'v*'
 
 jobs:
+
   archlinux:
     env:
         DIST_ID: archlinux
@@ -32,30 +33,6 @@ jobs:
         prerelease: true
         tag: ${{ github.ref }} 
         token: ${{ secrets.GITHUB_TOKEN }} 
-
-    #- name: Create Release
-    #  id: create_release
-    #  uses: actions/create-release@v1
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #    tag_name: ${{ github.ref }}
-    #    release_name: Release ${{ github.ref }}
-    #    draft: false
-    #    prerelease: false
-
-    #- name: Upload Release Assets
-    #  run: |
-    #    for f in docker/distros/*/*.tar.* ;\
-    #    do \
-    #        filename=$(basename $f) ;\
-    #        url=$(echo '${{ steps.create_release.outputs.upload_url }}' | sed "s:{?name,label}:?name=$filename:");\
-    #        echo curl --request POST \
-    #        --url $url \
-    #        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #        --header 'content-type: application/gzip' \
-    #        --form "data=@$f" ;\
-    #    done
 
   centos7:
     env:
@@ -84,31 +61,6 @@ jobs:
         tag: ${{ github.ref }} 
         token: ${{ secrets.GITHUB_TOKEN }} 
 
-    #- name: Create Release
-    #  id: create_release
-    #  uses: actions/create-release@v1
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #    tag_name: ${{ github.ref }}
-    #    release_name: Release ${{ github.ref }}
-    #    draft: false
-    #    prerelease: false
-
-    #- name: Upload Release Assets
-    #  run: |
-    #    for f in docker/distros/*/*.tar.* ;\
-    #    do \
-    #        filename=$(basename $f) ;\
-    #        url=$(echo '${{ steps.create_release.outputs.upload_url }}' | sed "s:{?name,label}:?name=$filename:");\
-    #        echo curl --request POST \
-    #        --url $url \
-    #        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #        --header 'content-type: application/gzip' \
-    #        --form "data=@$f" ;\
-    #    done
-
-
   fedora29:
     env:
         DIST_ID: fedora29
@@ -135,31 +87,6 @@ jobs:
         prerelease: true
         tag: ${{ github.ref }} 
         token: ${{ secrets.GITHUB_TOKEN }} 
-
-    #- name: Create Release
-    #  id: create_release
-    #  uses: actions/create-release@v1
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #    tag_name: ${{ github.ref }}
-    #    release_name: Release ${{ github.ref }}
-    #    draft: false
-    #    prerelease: false
-
-    #- name: Upload Release Assets
-    #  run: |
-    #    for f in docker/distros/*/*.tar.* ;\
-    #    do \
-    #        filename=$(basename $f) ;\
-    #        url=$(echo '${{ steps.create_release.outputs.upload_url }}' | sed "s:{?name,label}:?name=$filename:");\
-    #        echo curl --request POST \
-    #        --url $url \
-    #        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #        --header 'content-type: application/gzip' \
-    #        --form "data=@$f" ;\
-    #    done
-
 
   gentoo-amd64:
     env:
@@ -188,31 +115,6 @@ jobs:
         tag: ${{ github.ref }} 
         token: ${{ secrets.GITHUB_TOKEN }} 
 
-    #- name: Create Release
-    #  id: create_release
-    #  uses: actions/create-release@v1
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #    tag_name: ${{ github.ref }}
-    #    release_name: Release ${{ github.ref }}
-    #    draft: false
-    #    prerelease: false
-
-    #- name: Upload Release Assets
-    #  run: |
-    #    for f in docker/distros/*/*.tar.* ;\
-    #    do \
-    #        filename=$(basename $f) ;\
-    #        url=$(echo '${{ steps.create_release.outputs.upload_url }}' | sed "s:{?name,label}:?name=$filename:");\
-    #        echo curl --request POST \
-    #        --url $url \
-    #        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #        --header 'content-type: application/gzip' \
-    #        --form "data=@$f" ;\
-    #    done
-
-
   mint19-amd64:
     env:
         DIST_ID: mint19-amd64
@@ -239,31 +141,6 @@ jobs:
         prerelease: true
         tag: ${{ github.ref }} 
         token: ${{ secrets.GITHUB_TOKEN }} 
-
-    #- name: Create Release
-    #  id: create_release
-    #  uses: actions/create-release@v1
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #    tag_name: ${{ github.ref }}
-    #    release_name: Release ${{ github.ref }}
-    #    draft: false
-    #    prerelease: false
-
-    #- name: Upload Release Assets
-    #  run: |
-    #    for f in docker/distros/*/*.tar.* ;\
-    #    do \
-    #        filename=$(basename $f) ;\
-    #        url=$(echo '${{ steps.create_release.outputs.upload_url }}' | sed "s:{?name,label}:?name=$filename:");\
-    #        echo curl --request POST \
-    #        --url $url \
-    #        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #        --header 'content-type: application/gzip' \
-    #        --form "data=@$f" ;\
-    #    done
-
 
   ubuntu16_04:
     env:
@@ -292,31 +169,6 @@ jobs:
         tag: ${{ github.ref }} 
         token: ${{ secrets.GITHUB_TOKEN }} 
 
-    #- name: Create Release
-    #  id: create_release
-    #  uses: actions/create-release@v1
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #    tag_name: ${{ github.ref }}
-    #    release_name: Release ${{ github.ref }}
-    #    draft: false
-    #    prerelease: false
-
-    #- name: Upload Release Assets
-    #  run: |
-    #    for f in docker/distros/*/*.tar.* ;\
-    #    do \
-    #        filename=$(basename $f) ;\
-    #        url=$(echo '${{ steps.create_release.outputs.upload_url }}' | sed "s:{?name,label}:?name=$filename:");\
-    #        echo curl --request POST \
-    #        --url $url \
-    #        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #        --header 'content-type: application/gzip' \
-    #        --form "data=@$f" ;\
-    #    done
-
-
   ubuntu18_04:
     env:
         DIST_ID: ubuntu18.04
@@ -344,26 +196,3 @@ jobs:
         tag: ${{ github.ref }} 
         token: ${{ secrets.GITHUB_TOKEN }} 
 
-    #- name: Create Release
-    #  id: create_release
-    #  uses: actions/create-release@v1
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #    tag_name: ${{ github.ref }}
-    #    release_name: Release ${{ github.ref }}
-    #    draft: false
-    #    prerelease: false
-
-    #- name: Upload Release Assets
-    #  run: |
-    #    for f in docker/distros/*/*.tar.* ;\
-    #    do \
-    #        filename=$(basename $f) ;\
-    #        url=$(echo '${{ steps.create_release.outputs.upload_url }}' | sed "s:{?name,label}:?name=$filename:");\
-    #        echo curl --request POST \
-    #        --url $url \
-    #        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-    #        --header 'content-type: application/gzip' \
-    #        --form "data=@$f" ;\
-    #    done

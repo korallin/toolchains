@@ -1,0 +1,27 @@
+  !!!_name_!!!:
+    env:
+        DIST_ID: !!!_id_!!!
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: ./build-docker-${DIST_ID}.sh
+
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true 
+        artifacts: "docker/distros/*/*.tar.*"
+        artifactContentType: "application/gzip" 
+        draft: false
+        name: "Release ${{ github.ref }}"
+        prerelease: true
+        tag: ${{ github.ref }} 
+        token: ${{ secrets.GITHUB_TOKEN }} 
+
