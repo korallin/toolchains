@@ -22,12 +22,13 @@ jobs:
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   centos7:
     env:
@@ -44,12 +45,13 @@ jobs:
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   fedora29:
     env:
@@ -66,12 +68,13 @@ jobs:
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   gentoo-amd64:
     env:
@@ -88,12 +91,13 @@ jobs:
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   mint19-amd64:
     env:
@@ -110,12 +114,13 @@ jobs:
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ubuntu16_04:
     env:
@@ -132,12 +137,13 @@ jobs:
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ubuntu18_04:
     env:
@@ -154,10 +160,11 @@ jobs:
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

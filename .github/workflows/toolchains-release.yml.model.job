@@ -13,10 +13,11 @@
     - name: Build
       run: ./build-docker-${DIST_ID}.sh
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        prerelease: true
-        automatic_release_tag: latest
-        files: |
-          docker/distros/*/*.tar.*
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: docker/distros/*/*.tar.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
