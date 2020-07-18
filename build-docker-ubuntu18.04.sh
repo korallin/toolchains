@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker/build.sh ubuntu18.04
+docker/noninteractive-build.sh ubuntu18.04
+return $?
