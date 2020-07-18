@@ -201,7 +201,7 @@ jobs:
         done
 
 
-  ubuntu16.04:
+  ubuntu16_04:
     env:
         DIST_ID: ubuntu16.04
     runs-on: ubuntu-latest
@@ -240,7 +240,7 @@ jobs:
         done
 
 
-  ubuntu18.04:
+  ubuntu18_04:
     env:
         DIST_ID: ubuntu18.04
     runs-on: ubuntu-latest
