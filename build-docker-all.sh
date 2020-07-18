@@ -5,4 +5,4 @@ ret=$?
 
 docker/rm-all.sh
 
-return $ret
+exit $ret
