@@ -1,0 +1,47 @@
+name: ToolchainsRelease
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+        DIST_ID: archlinux
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: build-docker-${DIST_ID}.sh
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Assets
+      run: |
+        for f in docker/distros/*/*.tar.* ;\
+        do \
+            filename=$(basename $f) ;\
+            curl --request POST \
+            --url ${{ steps.create_release.outputs.upload_url }}?name=$filename \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            --header 'content-type: application/gzip' \
+            --form "data=@$f" ;\
+        done

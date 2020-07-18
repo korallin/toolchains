@@ -10,23 +10,18 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+        DIST_ID: ubuntu16.04
+
     steps:
-    - name: Get tag name
-      id: get_tag_name
-      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
     - name: Checkout
       uses: actions/checkout@v2
       with:
         submodules: true
 
-    - name: Build All
-      run: ./build-docker-all-noninteractive.sh
-
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        path: "docker/distros/*/*.tar.*"
+    - name: Build
+      run: build-docker-${DIST_ID}.sh
 
     - name: Create Release
       id: create_release
