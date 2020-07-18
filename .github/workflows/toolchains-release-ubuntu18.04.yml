@@ -21,7 +21,7 @@ jobs:
         submodules: true
 
     - name: Build
-      run: build-docker-${DIST_ID}.sh
+      run: ./build-docker-${DIST_ID}.sh
 
     - name: Create Release
       id: create_release
