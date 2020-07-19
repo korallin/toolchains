@@ -1,9 +1,9 @@
 #!/bin/bash
 
-docker_image_prefix="zoop-"
-
+: # Parameter Expansion
 : ${user_id:=`id -g`}
 : ${group_id:=`id -u`}
+: ${docker_image_prefix:="zoop-"}
 : ${docker_run_additional_params:-"-i -t"}
 
 basedir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
