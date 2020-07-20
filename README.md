@@ -1,2 +1,2 @@
-# pos-toolchains
-PoS Team Toolchain building repository
+# C/C++-toolchains
+Zoop Toolchain building repository
