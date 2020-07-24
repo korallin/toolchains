@@ -1,10 +1,13 @@
 #!/bin/bash --login
 # Use --login to ensure /etc/profile is read
 
-cd /home/docker_usr/ctng-workspace-arm-armv6l-linux-gnueabi/
-ln -s /home/docker_usr/ctng-config-arm-armv6l-linux-gnueabi/.config >/dev/null 2>&1
+basedir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+source ${basedir}/docker_path_consts.sh
 
-cd /home/docker_usr/ctng-workspace-arm-armv6l-linux-gnueabi/.build/tarballs
-for file in /home/docker_usr/.tarball_cache/* ; do
+cd ${docker_ctng_workspace_dir}
+ln -s ${docker_ctng_workspace_ro_dir}/.config >/dev/null 2>&1
+
+cd ${docker_ctng_workspace_dir}/.build/tarballs
+for file in ${docker_ctng_tarball_dir}/* ; do
   ln -s $file >/dev/null 2>&1
 done

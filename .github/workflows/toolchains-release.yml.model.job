@@ -1,6 +1,7 @@
   !!!_name_!!!:
     env:
-        DIST_ID: !!!_id_!!!
+        DIST_ID: !!!_distro_!!!
+        WKSP_ID: !!!_workspace_!!!
     runs-on: ubuntu-latest
 
     steps:
@@ -11,13 +12,13 @@
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

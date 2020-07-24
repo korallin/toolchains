@@ -7,9 +7,10 @@ on:
 
 jobs:
 
-  archlinux:
+  armv6-zoop-linux-gnueabi_archlinux:
     env:
-        DIST_ID: archlinux
+        DIST_ID: armv6-zoop-linux-gnueabi
+        WKSP_ID: archlinux
     runs-on: ubuntu-latest
 
     steps:
@@ -20,19 +21,20 @@ jobs:
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  centos7:
+  legacy_arm-armv6l-linux-gnueabi_archlinux:
     env:
-        DIST_ID: centos7
+        DIST_ID: legacy_arm-armv6l-linux-gnueabi
+        WKSP_ID: archlinux
     runs-on: ubuntu-latest
 
     steps:
@@ -43,19 +45,20 @@ jobs:
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  fedora29:
+  armv6-zoop-linux-gnueabi_centos7:
     env:
-        DIST_ID: fedora29
+        DIST_ID: armv6-zoop-linux-gnueabi
+        WKSP_ID: centos7
     runs-on: ubuntu-latest
 
     steps:
@@ -66,19 +69,20 @@ jobs:
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  gentoo-amd64:
+  legacy_arm-armv6l-linux-gnueabi_centos7:
     env:
-        DIST_ID: gentoo-amd64
+        DIST_ID: legacy_arm-armv6l-linux-gnueabi
+        WKSP_ID: centos7
     runs-on: ubuntu-latest
 
     steps:
@@ -89,19 +93,20 @@ jobs:
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  mint19-amd64:
+  armv6-zoop-linux-gnueabi_fedora29:
     env:
-        DIST_ID: mint19-amd64
+        DIST_ID: armv6-zoop-linux-gnueabi
+        WKSP_ID: fedora29
     runs-on: ubuntu-latest
 
     steps:
@@ -112,19 +117,20 @@ jobs:
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  ubuntu16_04:
+  legacy_arm-armv6l-linux-gnueabi_fedora29:
     env:
-        DIST_ID: ubuntu16.04
+        DIST_ID: legacy_arm-armv6l-linux-gnueabi
+        WKSP_ID: fedora29
     runs-on: ubuntu-latest
 
     steps:
@@ -135,19 +141,20 @@ jobs:
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  ubuntu18_04:
+  armv6-zoop-linux-gnueabi_gentoo-amd64:
     env:
-        DIST_ID: ubuntu18.04
+        DIST_ID: armv6-zoop-linux-gnueabi
+        WKSP_ID: gentoo-amd64
     runs-on: ubuntu-latest
 
     steps:
@@ -158,13 +165,181 @@ jobs:
         submodules: true
 
     - name: Build
-      run: ./build-docker-${DIST_ID}.sh
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        files: docker/distros/*/*.tar.*
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  legacy_arm-armv6l-linux-gnueabi_gentoo-amd64:
+    env:
+        DIST_ID: legacy_arm-armv6l-linux-gnueabi
+        WKSP_ID: gentoo-amd64
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  armv6-zoop-linux-gnueabi_mint19-amd64:
+    env:
+        DIST_ID: armv6-zoop-linux-gnueabi
+        WKSP_ID: mint19-amd64
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  legacy_arm-armv6l-linux-gnueabi_mint19-amd64:
+    env:
+        DIST_ID: legacy_arm-armv6l-linux-gnueabi
+        WKSP_ID: mint19-amd64
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  armv6-zoop-linux-gnueabi_ubuntu16_04:
+    env:
+        DIST_ID: armv6-zoop-linux-gnueabi
+        WKSP_ID: ubuntu16.04
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  legacy_arm-armv6l-linux-gnueabi_ubuntu16_04:
+    env:
+        DIST_ID: legacy_arm-armv6l-linux-gnueabi
+        WKSP_ID: ubuntu16.04
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  armv6-zoop-linux-gnueabi_ubuntu18_04:
+    env:
+        DIST_ID: armv6-zoop-linux-gnueabi
+        WKSP_ID: ubuntu18.04
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  legacy_arm-armv6l-linux-gnueabi_ubuntu18_04:
+    env:
+        DIST_ID: legacy_arm-armv6l-linux-gnueabi
+        WKSP_ID: ubuntu18.04
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
