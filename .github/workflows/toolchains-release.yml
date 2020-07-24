@@ -7,9 +7,9 @@ on:
 
 jobs:
 
-  arm-1136js-zoop-linux-gnueabi_archlinux:
+  arm1136js-zoop-linux-gnueabi_archlinux:
     env:
-        DIST_ID: arm-1136js-zoop-linux-gnueabi
+        DIST_ID: arm1136js-zoop-linux-gnueabi
         WKSP_ID: archlinux
     runs-on: ubuntu-latest
 
@@ -31,9 +31,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-cortex_a7-zoop-linux-gnueabi_archlinux:
+  armcortex_a7-zoop-linux-gnueabi_archlinux:
     env:
-        DIST_ID: arm-cortex_a7-zoop-linux-gnueabi
+        DIST_ID: armcortex_a7-zoop-linux-gnueabi
         WKSP_ID: archlinux
     runs-on: ubuntu-latest
 
@@ -55,9 +55,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-1136js-zoop-linux-gnueabi_centos7:
+  arm1136js-zoop-linux-gnueabi_centos7:
     env:
-        DIST_ID: arm-1136js-zoop-linux-gnueabi
+        DIST_ID: arm1136js-zoop-linux-gnueabi
         WKSP_ID: centos7
     runs-on: ubuntu-latest
 
@@ -79,9 +79,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-cortex_a7-zoop-linux-gnueabi_centos7:
+  armcortex_a7-zoop-linux-gnueabi_centos7:
     env:
-        DIST_ID: arm-cortex_a7-zoop-linux-gnueabi
+        DIST_ID: armcortex_a7-zoop-linux-gnueabi
         WKSP_ID: centos7
     runs-on: ubuntu-latest
 
@@ -103,9 +103,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-1136js-zoop-linux-gnueabi_fedora29:
+  arm1136js-zoop-linux-gnueabi_fedora29:
     env:
-        DIST_ID: arm-1136js-zoop-linux-gnueabi
+        DIST_ID: arm1136js-zoop-linux-gnueabi
         WKSP_ID: fedora29
     runs-on: ubuntu-latest
 
@@ -127,9 +127,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-cortex_a7-zoop-linux-gnueabi_fedora29:
+  armcortex_a7-zoop-linux-gnueabi_fedora29:
     env:
-        DIST_ID: arm-cortex_a7-zoop-linux-gnueabi
+        DIST_ID: armcortex_a7-zoop-linux-gnueabi
         WKSP_ID: fedora29
     runs-on: ubuntu-latest
 
@@ -151,9 +151,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-1136js-zoop-linux-gnueabi_gentoo-amd64:
+  arm1136js-zoop-linux-gnueabi_gentoo-amd64:
     env:
-        DIST_ID: arm-1136js-zoop-linux-gnueabi
+        DIST_ID: arm1136js-zoop-linux-gnueabi
         WKSP_ID: gentoo-amd64
     runs-on: ubuntu-latest
 
@@ -175,9 +175,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-cortex_a7-zoop-linux-gnueabi_gentoo-amd64:
+  armcortex_a7-zoop-linux-gnueabi_gentoo-amd64:
     env:
-        DIST_ID: arm-cortex_a7-zoop-linux-gnueabi
+        DIST_ID: armcortex_a7-zoop-linux-gnueabi
         WKSP_ID: gentoo-amd64
     runs-on: ubuntu-latest
 
@@ -199,9 +199,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-1136js-zoop-linux-gnueabi_mint19-amd64:
+  arm1136js-zoop-linux-gnueabi_mint19-amd64:
     env:
-        DIST_ID: arm-1136js-zoop-linux-gnueabi
+        DIST_ID: arm1136js-zoop-linux-gnueabi
         WKSP_ID: mint19-amd64
     runs-on: ubuntu-latest
 
@@ -223,9 +223,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-cortex_a7-zoop-linux-gnueabi_mint19-amd64:
+  armcortex_a7-zoop-linux-gnueabi_mint19-amd64:
     env:
-        DIST_ID: arm-cortex_a7-zoop-linux-gnueabi
+        DIST_ID: armcortex_a7-zoop-linux-gnueabi
         WKSP_ID: mint19-amd64
     runs-on: ubuntu-latest
 
@@ -247,9 +247,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-1136js-zoop-linux-gnueabi_ubuntu16_04:
+  arm1136js-zoop-linux-gnueabi_ubuntu16_04:
     env:
-        DIST_ID: arm-1136js-zoop-linux-gnueabi
+        DIST_ID: arm1136js-zoop-linux-gnueabi
         WKSP_ID: ubuntu16.04
     runs-on: ubuntu-latest
 
@@ -271,9 +271,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-cortex_a7-zoop-linux-gnueabi_ubuntu16_04:
+  armcortex_a7-zoop-linux-gnueabi_ubuntu16_04:
     env:
-        DIST_ID: arm-cortex_a7-zoop-linux-gnueabi
+        DIST_ID: armcortex_a7-zoop-linux-gnueabi
         WKSP_ID: ubuntu16.04
     runs-on: ubuntu-latest
 
@@ -295,9 +295,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-1136js-zoop-linux-gnueabi_ubuntu18_04:
+  arm1136js-zoop-linux-gnueabi_ubuntu18_04:
     env:
-        DIST_ID: arm-1136js-zoop-linux-gnueabi
+        DIST_ID: arm1136js-zoop-linux-gnueabi
         WKSP_ID: ubuntu18.04
     runs-on: ubuntu-latest
 
@@ -319,9 +319,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  arm-cortex_a7-zoop-linux-gnueabi_ubuntu18_04:
+  armcortex_a7-zoop-linux-gnueabi_ubuntu18_04:
     env:
-        DIST_ID: arm-cortex_a7-zoop-linux-gnueabi
+        DIST_ID: armcortex_a7-zoop-linux-gnueabi
         WKSP_ID: ubuntu18.04
     runs-on: ubuntu-latest
 
