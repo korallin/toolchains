@@ -26,13 +26,11 @@ run_docked() {
 }
 run_docker_build(){
 
-  mkdir -p ${curr_workspace_dir}
-
   if [ "$(docker images -q ${docker_image_prefix}${dockername}:latest 2> /dev/null)" == "" ]
   then
     echo "---- $dockernamei needs docker image to be built"
     echo docker build --no-cache -t ${docker_image_prefix}${dockername} --build-arg USER_ID=$user_id --build-arg GROUP_ID=$group_id ${curr_workspace_dir}
-    docker build --no-cache -t ${docker_image_prefix}${dockername} --build-arg USER_ID=$user_id --build-arg GROUP_ID=$group_id ${curr_workspace_dir}
+    docker build --no-cache -t ${docker_image_prefix}${dockername} --build-arg USER_ID=$user_id --build-arg GROUP_ID=$group_id ${basedir}/distros/${dockername}
 
     if [ $? -eq 0 ]; then
       echo ---- Build successfull
