@@ -83,8 +83,8 @@ run_docker_build(){
   if [ -f $toolchain ] && [ ! $toolchain -ot $toolchain_tar ]
   then
     echo "---- $dockername needs toolchain tar to be assembled"
-    echo "tar -caf ${toolchain_tar} -C ${curr_workspace_dir} opt/cross"
-    tar -caf ${toolchain_tar} -C ${curr_workspace_dir} opt/cross
+    echo "tar -caf ${toolchain_tar} -C ${curr_workspace_dir}/opt/cross ."
+    tar -caf ${toolchain_tar} -C ${curr_workspace_dir}/opt/cross .
   else
     echo "---- $dockername : Nothing to be done to toolchain tar"
   fi
