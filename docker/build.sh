@@ -26,6 +26,8 @@ run_docked() {
 }
 run_docker_build(){
 
+  mkdir -p ${curr_workspace_dir}
+
   if [ "$(docker images -q ${docker_image_prefix}${dockername}:latest 2> /dev/null)" == "" ]
   then
     echo "---- $dockernamei needs docker image to be built"
