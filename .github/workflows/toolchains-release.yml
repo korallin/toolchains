@@ -55,6 +55,30 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  armv7a_cortex_a9-zoop-linux-gnueabihf_archlinux:
+    env:
+        DIST_ID: armv7a_cortex_a9-zoop-linux-gnueabihf
+        WKSP_ID: archlinux
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   armv6_1136js-zoop-linux-gnueabi_centos7:
     env:
         DIST_ID: armv6_1136js-zoop-linux-gnueabi
@@ -82,6 +106,30 @@ jobs:
   armv7a_cortex_a7-zoop-linux-gnueabi_centos7:
     env:
         DIST_ID: armv7a_cortex_a7-zoop-linux-gnueabi
+        WKSP_ID: centos7
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  armv7a_cortex_a9-zoop-linux-gnueabihf_centos7:
+    env:
+        DIST_ID: armv7a_cortex_a9-zoop-linux-gnueabihf
         WKSP_ID: centos7
     runs-on: ubuntu-latest
 
@@ -151,6 +199,30 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  armv7a_cortex_a9-zoop-linux-gnueabihf_fedora29:
+    env:
+        DIST_ID: armv7a_cortex_a9-zoop-linux-gnueabihf
+        WKSP_ID: fedora29
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   armv6_1136js-zoop-linux-gnueabi_gentoo-amd64:
     env:
         DIST_ID: armv6_1136js-zoop-linux-gnueabi
@@ -178,6 +250,30 @@ jobs:
   armv7a_cortex_a7-zoop-linux-gnueabi_gentoo-amd64:
     env:
         DIST_ID: armv7a_cortex_a7-zoop-linux-gnueabi
+        WKSP_ID: gentoo-amd64
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  armv7a_cortex_a9-zoop-linux-gnueabihf_gentoo-amd64:
+    env:
+        DIST_ID: armv7a_cortex_a9-zoop-linux-gnueabihf
         WKSP_ID: gentoo-amd64
     runs-on: ubuntu-latest
 
@@ -247,6 +343,30 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  armv7a_cortex_a9-zoop-linux-gnueabihf_mint19-amd64:
+    env:
+        DIST_ID: armv7a_cortex_a9-zoop-linux-gnueabihf
+        WKSP_ID: mint19-amd64
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   armv6_1136js-zoop-linux-gnueabi_ubuntu16_04:
     env:
         DIST_ID: armv6_1136js-zoop-linux-gnueabi
@@ -295,6 +415,30 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  armv7a_cortex_a9-zoop-linux-gnueabihf_ubuntu16_04:
+    env:
+        DIST_ID: armv7a_cortex_a9-zoop-linux-gnueabihf
+        WKSP_ID: ubuntu16.04
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   armv6_1136js-zoop-linux-gnueabi_ubuntu18_04:
     env:
         DIST_ID: armv6_1136js-zoop-linux-gnueabi
@@ -322,6 +466,30 @@ jobs:
   armv7a_cortex_a7-zoop-linux-gnueabi_ubuntu18_04:
     env:
         DIST_ID: armv7a_cortex_a7-zoop-linux-gnueabi
+        WKSP_ID: ubuntu18.04
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build
+      run: docker/noninteractive-build.sh ${DIST_ID} ${WKSP_ID}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: docker/distros/*/*/*.tar.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  armv7a_cortex_a9-zoop-linux-gnueabihf_ubuntu18_04:
+    env:
+        DIST_ID: armv7a_cortex_a9-zoop-linux-gnueabihf
         WKSP_ID: ubuntu18.04
     runs-on: ubuntu-latest
 
