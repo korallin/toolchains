@@ -1,4 +1,4 @@
-FROM archlinux/base:latest
+FROM archlinux:latest
 ARG USER_ID
 ARG GROUP_ID
 RUN pacman -Sy --noconfirm archlinux-keyring
